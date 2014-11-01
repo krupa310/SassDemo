@@ -1,0 +1,154 @@
+﻿
+//variables
+$font-stack: Helvetica, sans-serif;
+$font-style: Times New Roman, Times, serif;
+$font-family: Verdana, Geneva, sans-serif;
+$font-heading: Impact, Charcoal, sans-serif;
+$font-menu: "Comic Sans MS", cursive, sans-serif;
+$font-dropdown: Gill Sans Extrabold, sans-serif;
+
+//Import color from colors.scss
+@import 'colors';
+
+
+body {
+    font: $font-stack;
+    color: $primary-color;
+}
+.jumbotron{margin-top:50px}
+
+//class for extend
+.nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.pinkColor{
+     background-color: $pink-color;
+}
+
+
+.navbar-inverse {
+    background-color: $blue-color;
+
+    .navbar-brand {
+        color: $silver-color;
+        font-family: $font-heading;
+    }
+    //&-for extending parent
+    .navbar-nav {
+        & > li {
+            & > a {
+                color: $pink-color;
+                font-family: $font-menu;
+            }
+
+            & > a:hover, & > a:focus {
+                @extend .pinkColor;
+               // background-color: $pink-color;
+                color: $Cornsilk-color;
+            }
+        }
+
+        & > .active {
+            & > a, & > a:hover, & > a:focus {
+                @extend .pinkColor;
+                //background-color: $pink-color;
+                color: $Cornsilk-color;
+            }
+        }
+
+        & > .open {
+            & > a, & > a:hover, & > a:focus {
+                @extend .pinkColor;
+              //  background-color: $pink-color;
+            }
+        }
+
+        .dropdown-menu {
+            & > li {
+                & > a {
+                    font-family: $font-dropdown;
+
+                    &:hover, &:focus {
+                        @extend .pinkColor;
+                        //background-color: $pink-color;
+                    }
+                }
+                /*& > a:hover, & > a:focus {
+                background-color: $pink-color;
+            }*/
+            }
+        }
+    }
+}
+
+
+
+
+
+.tool-div {
+    //Use of extend
+    ul {
+        @extend .nav;
+        background-color: $Coral-color;
+        width: 100px;
+    }
+
+    li {
+        display: block;
+
+        &:hover {
+            background-color: $DarkSalmon-color;
+        }
+    }
+
+    a {
+        padding: 5px;
+        display: block;
+        color: $BlueViolet-color;
+
+        font: {
+            family: $font-menu;
+            weight: bold;
+            size: 12px;
+        }
+    }
+}
+//use of mixin
+@mixin border($radius,$width) {
+    border: {
+        radius: $radius;
+        color: $silver-color;
+        style: solid;
+        width: $width;
+    }
+}
+
+.box {
+    @include border(10px, 1px);
+    padding: 0 5px;
+    margin:10px;
+    border: 1px solid #666;
+}
+
+
+//if() function
+
+$type: monster;
+
+p {
+    @if $type == ocean {
+        color: $BlueViolet-color;
+    }
+    @else if $type == matador {
+        color: red;
+    }
+    @else if $type == monster {
+        color: $YellowGreen-color;
+    }
+    @else {
+        color: $DarkSalmon-color;
+    }
+}
